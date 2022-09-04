@@ -1,6 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_sample/firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase の初期化
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // 匿名ユーザーでサインインする
+  final firebaseUser = await FirebaseAuth.instance.userChanges().first;
+  print('uid = ${firebaseUser?.uid}');
+  if (firebaseUser == null) {
+    // 未サインインなので匿名ユーザーでサインインする
+    final credential = await FirebaseAuth.instance.signInAnonymously();
+    final uid = credential.user!.uid;
+    print('Signed in: uid = $uid');
+  }
+
   runApp(const MyApp());
 }
 
