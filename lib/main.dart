@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_sample/firebase_options_dev.dart';
-import 'package:flutterfire_sample/firebase_options_prod.dart';
+import 'package:flutterfire_sample/firebase_options_dev.dart' as dev;
+import 'package:flutterfire_sample/firebase_options_prod.dart' as prod;
 
 const flavor = String.fromEnvironment('FLAVOR');
 
@@ -11,8 +11,8 @@ Future<void> main() async {
 
   // Flavor に応じた FirebaseOptions を準備する
   final firebaseOptions = flavor == 'prod'
-      ? DefaultFirebaseOptionsProd.currentPlatform
-      : DefaultFirebaseOptionsDev.currentPlatform;
+      ? prod.DefaultFirebaseOptions.currentPlatform
+      : dev.DefaultFirebaseOptions.currentPlatform;
 
   // Firebase の初期化
   await Firebase.initializeApp(
