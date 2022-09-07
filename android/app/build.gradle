@@ -66,10 +66,12 @@ android {
         dev {
             dimension 'flavor'
             applicationIdSuffix '.dev'
+            manifestPlaceholders = [appName: '(d)FlutterFire']
         }
         prod {
             dimension 'flavor'
             applicationIdSuffix ''
+            manifestPlaceholders = [appName: 'FlutterFire']
         }
     }
 }
